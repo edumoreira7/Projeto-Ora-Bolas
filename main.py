@@ -1,9 +1,11 @@
 from math import *
 from random import *
 
-def interceptar(robo, bola):
+def interceptar(robo, bola, tempo):
 
-  return
+  mod_tan = sqrt(((bola['x'] - robo['x'])/(bola['y'] - robo['y']))**2)
+
+  return mod_tan
 
 robo_xi_max = int(2 * 100)
 robo_xi_min = 0
@@ -62,3 +64,5 @@ for i in range(len(dados_a)):
     'x': dados_a[i][1],
     'y': dados_a[i][2],
   }
+print(robo['x'], robo['y'])
+print(interceptar(robo, bola, dados_bola))
