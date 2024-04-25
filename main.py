@@ -1,6 +1,10 @@
 from math import *
 from random import *
 
+def interceptar(robo, bola):
+
+  return
+
 robo_xi_max = int(2 * 100)
 robo_xi_min = 0
 
@@ -22,12 +26,20 @@ robo = {
   'x': robo_xi,
   'y': robo_yi,
   'raio': 0.09, #m
+  'vel_max': 2.8,
   'vel': 0,
   'vel_x': 0,
   'vel_y': 0,
   'acc': 0,
   'acc_x': 0,
-  'acc_y': 0
+  'acc_y': 0,
+  'interceptado': False
+}
+
+bola = {
+  'x': 1,
+  'y': 0.5,
+  'distancia': dist_i
 }
 
 
