@@ -7,7 +7,46 @@ def interceptar(robo, bola, tempo):
 
   angulo = atan(mod_tan)
 
-  return angulo
+  bola['distancia'] = sqrt((bola['x'] - robo['x'])**2 + (bola['y'] - robo['y'])**2)
+
+  if bola['distancia'] >= 2.8:
+    robo['vel_max'] = 2.8
+    robo['acc'] = 2.8
+  elif (bola['distancia'] >= 2.5) and (bola['distancia'] < 2.8):
+    robo['vel_max'] = 2.5
+    robo['acc'] = 1.25
+  elif (bola['distancia'] >= 2.2) and (bola['distancia'] < 2.5):
+    robo['vel_max'] = 2.2
+    robo['acc'] = 1.1
+  elif (bola['distancia'] >= 1.9) and (bola['distancia'] < 2.2):
+    robo['vel_max'] = 1.9
+    robo['acc'] = 0.95
+  elif (bola['distancia'] >= 1.6) and (bola['distancia'] < 1.9):
+    robo['vel_max'] = 1.6
+    robo['acc'] = 0.8
+  elif (bola['distancia'] >= 1.3) and (bola['distancia'] < 1.6):
+    robo['vel_max'] = 1.3
+    robo['acc'] = 0.65
+  elif (bola['distancia'] >= 1.0) and (bola['distancia'] < 1.3):
+    robo['vel_max'] = 1.0
+    robo['acc'] = 0.5
+  elif (bola['distancia'] >= 0.7) and (bola['distancia'] < 1.0):
+    robo['vel_max'] = 0.7
+    robo['acc'] = 0.35
+  elif (bola['distancia'] >= 0.4) and (bola['distancia'] < 0.7):
+    robo['vel_max'] = 0.4
+    robo['acc'] = 0.2
+  elif (bola['distancia'] >= 0.1) and (bola['distancia'] < 0.4):
+    robo['vel_max'] = 0.1
+    robo['acc'] = 0.05
+
+  if robo['vel'] < robo['vel_max']:
+    robo['vel'] += robo['acc'] * 0.2
+  elif robo['vel'] > robo['vel_max']:
+    robo['vel'] -= robo['acc'] * 0.2
+  
+
+  return 0
 
 robo_xi_max = int(2 * 100)
 robo_xi_min = 0
@@ -67,5 +106,3 @@ for i in range(len(dados_a)):
     'y': dados_a[i][2],
   }
   
-print(robo['x'], robo['y'])
-print(interceptar(robo, bola, dados_bola))
