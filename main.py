@@ -45,6 +45,7 @@ def interceptar(robo, bola, tempo):
   elif robo['vel'] > robo['vel_max']:
     robo['vel'] -= robo['acc'] * 0.2
   
+  robo
 
   return 0
 
