@@ -3,7 +3,11 @@ from random import *
 
 def interceptar(robo, bola, tempo):
 
-  mod_tan = sqrt(((bola['x'] - robo['x'])/(bola['y'] - robo['y']))**2)
+  if (bola['y'] - robo['y']) == 0:
+    tend = 0.00000000000000001
+    mod_tan = sqrt(((bola['x'] - robo['x'])/(tend))**2)
+  else:
+    mod_tan = sqrt(((bola['x'] - robo['x'])/(bola['y'] - robo['y']))**2)
 
   angulo = atan(mod_tan)
 
@@ -66,6 +70,15 @@ def interceptar(robo, bola, tempo):
   robo['x'] += robo['vel_x']
   robo['y'] += robo['vel_y']
 
+  if (bola['distancia'] <= robo['raio']):
+    print("Bola interceptada")
+    print("Em: %.2fs", tempo)
+    robo['interceptado'] = True
+    return robo
+  else:
+    return robo
+    
+
   return 0
 
 robo_xi_max = int(2 * 100)
@@ -107,7 +120,7 @@ bola = {
 
 
 
-dados_bola = {}
+dados_bola = []
 
 dados_a = []
 
@@ -115,14 +128,30 @@ trajetoria_bola = open("trajetoria_bola.txt", "r")
 
 for linha in trajetoria_bola.readlines():
   dados_a.append(linha.strip().split('//'))
+  dados_bola.append({
+    't': linha.strip().split('//')[0],
+    'x': linha.strip().split('//')[1],
+    'y': linha.strip().split('//')[2],
+  })
 
 trajetoria_bola.close()
-for i in range(len(dados_a)):
+""" for i in range(len(dados_a)):
   dados_a[i][0] = float(dados_a[i][0])
   dados_a[i][1] = float(dados_a[i][1])
   dados_a[i][2] = float(dados_a[i][2])
   dados_bola[dados_a[i][0]] = {
+    't': dados_a[i][0],
     'x': dados_a[i][1],
     'y': dados_a[i][2],
-  }
-  
+  } """
+
+for i in range(len(dados_bola)):
+  tempo = float(dados_bola[i]['t'])
+  bola['x'] = float(dados_bola[i]['x'])
+  bola['y'] = float(dados_bola[i]['y'])
+  robo = interceptar(robo, bola, tempo)
+
+  if robo['interceptado']  == True:
+    break
+  else:
+    pass
