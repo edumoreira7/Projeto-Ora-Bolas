@@ -45,7 +45,26 @@ def interceptar(robo, bola, tempo):
   elif robo['vel'] > robo['vel_max']:
     robo['vel'] -= robo['acc'] * 0.2
   
-  robo
+
+  robo['vel_x'] = robo['vel'] * sin(angulo)
+  robo['vel_y'] = robo['vel'] * cos(angulo)
+
+  robo['acc_x'] = robo['acc'] * sin(angulo)
+  robo['acc_y'] = robo['acc'] * cos(angulo)
+
+  # sentido da velocidade
+  if (robo['x'] < bola['x']):
+    robo['vel_x'] = sqrt(robo['vel_x']**2)
+  else:
+    robo['vel_x'] = -sqrt(robo['vel_x']**2)
+
+  if (robo['y'] < bola['y']):
+    robo['vel_y'] = sqrt(robo['vel_y']**2)
+  else:
+    robo['vel_y'] = -sqrt(robo['vel_y']**2)
+
+  robo['x'] += robo['vel_x']
+  robo['y'] += robo['vel_y']
 
   return 0
 
